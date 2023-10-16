@@ -1,15 +1,16 @@
-import { useDispatch } from 'react-redux';
-import { removeOnePizza, addPizzaToCart } from '../redux/thunk/thunkCart';
-import { removeItemFromCart } from '../redux/slices/cart.js';
+import { removeItemFromCart } from '../redux/slices/cart.ts';
+import { CartItemType } from '../types';
+import { useAppDispatch } from '../hooks/reduxHooks.ts';
+import { addItemToCart, removeOnePizza } from '../redux/slices/cart.ts';
 
-export const CartItem = ({ item }) => {
-  const dispatch = useDispatch();
+export const CartItem = ({ item }: { item: CartItemType }) => {
+  const dispatch = useAppDispatch();
 
   const removeOnePizzaHandler = () => {
     dispatch(removeOnePizza(item.id));
   };
   const addOnePizzaHandler = () => {
-    dispatch(addPizzaToCart(item));
+    dispatch(addItemToCart(item));
   };
   const removeItemFromCartHandler = () => {
     dispatch(removeItemFromCart(item.id));

@@ -1,17 +1,34 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addPizzaToCart } from '../../redux/thunk/thunkCart';
+import { useState } from 'react';
+import { CartItemType, PizzaItemType } from '../../types';
+import { RootState } from '../../types';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import { addItemToCart } from '../../redux/slices/cart';
 
-export const PizzaBlock = (props) => {
-  const { imageUrl, price, sizes, title, types, id, category } = props;
+export const PizzaBlock = (props: PizzaItemType) => {
+  const { imageUrl, price, sizes, title, types, id } = props;
   const typeNames = ['тонкое', 'традиционное'];
   const [activeSize, setActiveSize] = useState(0);
   const [activeType, setActiveType] = useState(types[0]);
+  const dispatch = useAppDispatch();
 
-  const cartItems = useSelector((state) =>
-    state.cartSlice.cartItems.find((item) => item.id === id),
+  const currentItem: CartItemType = {
+    imageUrl,
+    price,
+    title,
+    id,
+    type: typeNames[activeType],
+    size: sizes[activeSize],
+    count: 1,
+  };
+
+  const cartItems: Array<CartItemType> = useAppSelector(
+    (state: RootState) => state.cartSlice.cartItems,
   );
-  const dispatch = useDispatch();
+  const currentCartItem = cartItems.find((item: CartItemType) => item.id === id);
+
+  const addOnePizzaHandler = () => {
+    dispatch(addItemToCart(currentItem));
+  };
 
   return (
     <div className="pizza-block">
@@ -59,25 +76,12 @@ export const PizzaBlock = (props) => {
               fill="white"
             />
           </svg>
-          <span
-            onClick={() =>
-              dispatch(
-                addPizzaToCart({
-                  imageUrl,
-                  price,
-                  title,
-                  id,
-                  type: typeNames[activeType],
-                  size: sizes[activeSize],
-                  count: 1,
-                }),
-              )
-            }>
-            Добавить
-          </span>
-          {cartItems?.count > 0 && <i>{cartItems.count}</i>}
+          <span onClick={addOnePizzaHandler}>Добавить</span>
+          {currentCartItem && currentCartItem?.count > 0 && <i>{currentCartItem?.count}</i>}
         </div>
       </div>
     </div>
   );
 };
+
+//

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Selector from '../redux/selectors/Selector.js';
-import { setActiveSortType } from '../redux/slices/filter.js';
+import Selector from '../redux/selectors/Selector.ts';
+import { setActiveSortType } from '../redux/slices/filter.ts';
 
 export const Sort = ({ sortItems }) => {
   const dispath = useDispatch();

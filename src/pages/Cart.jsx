@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Selector from '../redux/selectors/Selector.js';
+import Selector from '../redux/selectors/Selector.ts';
 import { useSelector, useDispatch } from 'react-redux';
-import { CartItem } from '../components/CartItem.jsx';
-import { setCartItems } from '../redux/slices/cart.js';
+import { CartItem } from '../components/CartItem.tsx';
+import { removeItemsFromCart } from '../redux/slices/cart.ts';
 
 export const Cart = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ export const Cart = () => {
   const cartItemsCount = useSelector(Selector.memoCartItemsCount);
 
   const removeAllItemsFromCartHandler = () => {
-    dispatch(setCartItems([]));
+    dispatch(removeItemsFromCart([]));
   };
 
   useEffect(() => {

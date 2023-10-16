@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice , PayloadAction } from '@reduxjs/toolkit';
+import { FilterState } from '../../types';
 
-const initialState = {
+const initialState:FilterState = {
   sortItems: [
     { id: 0, title: 'популярности asc', requestValue: 'rating', order: 'asc' },
     { id: 1, title: 'популярности desc', requestValue: 'rating', order: 'desc' },
@@ -18,10 +19,10 @@ const filterSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setActiveSortType: (state, action) => {
+    setActiveSortType: (state, action:PayloadAction<number>) => {
       state.sortListIndex = action.payload;
-    },
-    setActiveCategory: (state, action) => {
+    }, 
+    setActiveCategory: (state, action:PayloadAction<number>) => {
       state.categoryIndex = action.payload;
     },
   },

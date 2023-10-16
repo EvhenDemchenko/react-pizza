@@ -1,7 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { getAllPizzasFromDb } from '../thunk/thunkPizzas.js';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { getAllPizzasFromDb } from '../thunk/thunkPizzas.ts';
+import { PizzasState } from '../../types.ts';
 
-const initialState = {
+const initialState: PizzasState = {
   items: [],
   isLoading: false,
   isError: false,
@@ -12,19 +13,19 @@ const pizzasSlice = createSlice({
   name: 'pizzas',
   initialState,
   reducers: {
-    setSearchValue: (state, action) => {
+    setSearchValue: (state, action: PayloadAction<string>) => {
       state.searchValue = action.payload;
     },
   },
   extraReducers: (bulder) => {
-    bulder.addCase(getAllPizzasFromDb.pending, (state, action) => {
+    bulder.addCase(getAllPizzasFromDb.pending, (state) => {
       state.isLoading = true;
     });
     bulder.addCase(getAllPizzasFromDb.fulfilled, (state, action) => {
       state.isLoading = false;
       state.items = action.payload;
     });
-    bulder.addCase(getAllPizzasFromDb.rejected, (state, action) => {
+    bulder.addCase(getAllPizzasFromDb.rejected, (state) => {
       state.isError = true;
     });
   },

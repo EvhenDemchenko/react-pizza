@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { Search } from './Search/Search';
 import { useSelector } from 'react-redux';
-import Selector from '../redux/selectors/Selector.js';
+import Selector from '../redux/selectors/Selector.ts';
 
 export const Header = () => {
   const cartItemsSum = useSelector(Selector.memoCartItemsSum);

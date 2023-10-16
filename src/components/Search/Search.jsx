@@ -1,7 +1,7 @@
 import styles from './Search.module.scss';
 import { useDispatch } from 'react-redux';
 
-import { setSearchValue } from '../../redux/slices/pizzas.js';
+import { setSearchValue } from '../../redux/slices/pizzas.ts';
 import { useDebaunce } from '../../hooks/useDebounce.js';
 import { useEffect, useState } from 'react';
 

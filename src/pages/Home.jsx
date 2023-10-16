@@ -1,13 +1,14 @@
 import Paginate from '../components/Pagination';
 import { Categories } from '../components/Categories.jsx';
 import { Sort } from '../components/Sort.jsx';
-import { PizzaBlock } from '../components/PizzaBlock/index.jsx';
+import { PizzaBlock } from '../components/PizzaBlock/index.tsx';
 import { Skeleton } from '../components/PizzaBlock/Skeleton.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getAllPizzasFromDb } from '../redux/thunk/thunkPizzas';
 
 import Selector from '../redux/selectors/Selector';
+import { NavLink } from 'react-router-dom';
 
 export const Home = () => {
   const activeIndex = useSelector(Selector.sortIndex);
@@ -37,7 +38,11 @@ export const Home = () => {
   });
 
   const pizzas = pizzaItems.map((item) => {
-    return <PizzaBlock key={item?.id} {...item} />;
+    return (
+      // <NavLink key={item?.id} to={`/${item.id}`}>
+      <PizzaBlock key={item.id} {...item} />
+      // </NavLink>
+    );
   });
 
   return (

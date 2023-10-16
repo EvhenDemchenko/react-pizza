@@ -1,19 +1,20 @@
 import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '../../types.ts';
 
 const selector = {
   //search
-  searchValue: (state) => state.pizzasSlice.searchValue,
+  searchValue: (state:RootState) => state.pizzasSlice.searchValue,
   //sort
-  sortIndex: (state) => state.filterSlice.sortListIndex,
-  sortItems: (state) => state.filterSlice.sortItems,
-  categoryItems: (state) => state.filterSlice.categoryItems,
-  categoryIndex: (state) => state.filterSlice.categoryIndex,
+  sortIndex: (state:RootState) => state.filterSlice.sortListIndex,
+  sortItems: (state:RootState) => state.filterSlice.sortItems,
+  categoryItems: (state:RootState) => state.filterSlice.categoryItems,
+  categoryIndex: (state:RootState) => state.filterSlice.categoryIndex,
   //pizzas
-  allPizzas: (state) => state.pizzasSlice.items,
-  isLoading: (state) => state.pizzasSlice.isLoading,
-  isError: (state) => state.pizzasSlice.isError,
+  allPizzas: (state:RootState) => state.pizzasSlice.items,
+  isLoading: (state:RootState) => state.pizzasSlice.isLoading,
+  isError: (state:RootState) => state.pizzasSlice.isError,
   //cart
-  cartItems: (state) => state.cartSlice.cartItems,
+  cartItems: (state:RootState) => state.cartSlice.cartItems,
 };
 
 const activeSortItem = createSelector([selector.sortItems, selector.sortIndex], (items, index) => {
